@@ -20,13 +20,16 @@ void setup() {
   videoThread = new VideoThread();
   videoThread.start();
  
+ frameRate( 10 );
 }
 
 void draw() {
   background(0);
   stroke(255);
-//  musicThread.setBPM( ( mouseX + 1 )  / 3);
-  musicThread.setBPM( ( videoThread.num + 1 )  / 3);
+  //musicThread.setBPM( ( mouseX + 1 ) / 3 );
+  float mapped = map(videoThread.num,0,(25*249),5,200);
+  musicThread.setBPM(mapped);
+  println( mapped );
   
   // draw the waveforms
   for(int i = 0; i < out.bufferSize() - 1; i++)
@@ -35,5 +38,4 @@ void draw() {
     line( i, 150 + out.right.get(i)*50, i+1, 150 + out.right.get(i+1)*50 );
   }
 }
-
 

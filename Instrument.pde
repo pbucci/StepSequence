@@ -19,11 +19,11 @@ class SineInstrument implements Instrument {
       float currentBPM = musicThread.getBPM();
       
       if ( currentBPM >= 60 ) {
-        ampEnv.activate( duration, 0.5f, 0 );
+        ampEnv.activate( duration, 0.8f, 0 );
       } else if ( currentBPM >= 30 ) {
-        ampEnv.activate( duration, 0.5f, 0.25f );
+        ampEnv.activate( duration, 0.8f, 0.45f );
       } else {
-        ampEnv.activate( duration, 0.5f, 0.5f );
+        ampEnv.activate( duration, 0.8f, 0.8f );
       }
       
     // attach the oscil to the output so it makes sound

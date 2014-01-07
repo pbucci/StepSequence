@@ -36,14 +36,13 @@ void run() {
   }
 }
 
+int getNum() { return num; }
+
 // Samples video
 void runVideo() {
-  boolean videoThere = false;
   // Capture video
   if (video.available()) {
-      num = 0;
-    println("video was available");
-    // Save previous frame for motion detection!!
+    // Save previous frame for motion detection
     prevFrame.copy(video,0,0,video.width,video.height,0,0,video.width,video.height); // Before we read the new frame, we always save the previous frame for comparison!
     prevFrame.updatePixels();
         try {
@@ -51,11 +50,12 @@ void runVideo() {
       } catch (Exception e) {
       }
     video.read();
-    videoThere = true;
   }
   
   video.loadPixels();
   prevFrame.loadPixels();
+  
+  num = 0;
   
   // Begin loop to walk through every pixel
   for (int x = 0; x < video.width; x ++ ) {
@@ -72,18 +72,10 @@ void runVideo() {
       
       // Step 5, How different are the colors?
       // If the color at that pixel has changed, then there is motion at that pixel.
-      if (diff > threshold) { 
+      if (diff > threshold) {
         num++;
-        // If motion, display black
-        //pixels[loc] = color(0);
-      } else {
-        // If not, display white
-        //pixels[loc] = color(255);
       }
     }
-  }
-  if (videoThere == true) {
-    println("We're at " + num);
   }
  }
 }
